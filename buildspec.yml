@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - gem install bundler
+      - cd app && bundle install --binstubs
+  build:
+    commands:
+      - rspec -f d
+
+artifacts:
+  base-directory: app
+  files:
+    - lib/**/*
+    - config.ru
+    - .ruby-gemset
+    - .ruby-version
+    - Gemfile
+    - Gemfile.lock
