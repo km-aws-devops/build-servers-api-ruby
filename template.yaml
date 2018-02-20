@@ -68,7 +68,7 @@ Resources:
   pipeline:
     Type: AWS::CodePipeline::Pipeline
     Properties:
-      Name: servers-api-ruby
+      Name: !Sub "${BranchName}-${RepositoryName}"
       ArtifactStore:
         Type: S3
         Location: !Ref 'artifactStoreBucket'
