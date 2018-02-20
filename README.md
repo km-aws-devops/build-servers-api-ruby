@@ -45,4 +45,4 @@ $ git push cc develop
 
 ```
 
-- Refer [documentation](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html?icmpid=docs_acc_console_connect) for connecting to CodeCommit repositories
+- Refer [documentation](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-https-unixes.html) for connecting to CodeCommit repositories using the AWS CLI credential helper
