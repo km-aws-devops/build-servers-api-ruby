@@ -36,10 +36,15 @@ Resources:
                 - 'ec2:DescribeDhcpOptions'
                 - 'ec2:DescribeVpcs'
                 - 'ec2:CreateNetworkInterfacePermission'
+                Effect: Allow
+                Resource: '*'
+
+              - Action:
                 - 's3:Get*'
                 - 's3:Put*'
                 Effect: Allow
-                Resource: '*'
+                Resource:
+                  - !Sub "arn:aws:s3:::${artifactStoreBucket}/*"
 
   build:
     Type: AWS::CodeBuild::Project
