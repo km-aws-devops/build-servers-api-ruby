@@ -36,7 +36,6 @@ Resources:
                 - 'ec2:DescribeDhcpOptions'
                 - 'ec2:DescribeVpcs'
                 - 'ec2:CreateNetworkInterfacePermission'
-                - 'codecommit:GitPull'
                 - 's3:Get*'
                 - 's3:Put*'
                 Effect: Allow
