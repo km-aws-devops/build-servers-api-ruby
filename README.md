@@ -8,10 +8,41 @@ Use AWS CodeBuild to build an API written in Ruby to be deployed to servers
 - Provision the CloudFormation stack as follows:
 
 ```
+# Provision the CloudFormation stack
 $ aws cloudformation create-stack \
     --stack-name develop-build-servers-api-ruby \
     --template-body file://template.yaml \
     --capabilities CAPABILITY_IAM
+
+# Get the HTTP clone URL for the repository in CodeCommit
+$ aws cloudformation describe-stacks \
+    --stack-name develop-build-servers-api-ruby \
+    --query "Stacks[0].Outputs[*].OutputValue" \
+    --output text
+https://git-codecommit.us-east-1.amazonaws.com/v1/repos/build-servers-api-ruby
     
 ```
 - Once provisioned, the code artifacts in this repository are to be pushed to the repository in CodeCommit
+
+```
+# Configure credentials for an IAM user that has the privileges to push code to the repository in CodeCommit
+
+$ export AWS_PROFILE=my-iam-user
+$ git config credential.helper '!aws codecommit credential-helper $@'
+$ git config credential.UseHttpPath true
+
+# Use the HTTP clone URL obtained from the CloudFormation stack output
+$ git remote add cc https://git-codecommit.us-east-1.amazonaws.com/v1/repos/build-servers-api-ruby
+$ git remote -v
+cc	https://git-codecommit.us-east-1.amazonaws.com/v1/repos/build-servers-api-ruby (fetch)
+cc	https://git-codecommit.us-east-1.amazonaws.com/v1/repos/build-servers-api-ruby (push)
+gh	git@github.com:km-aws-devops/build-servers-api-ruby.git (fetch)
+gh	git@github.com:km-aws-devops/build-servers-api-ruby.git (push)
+
+$ git branch
+* develop
+$ git push cc develop 
+
+```
+
+- Refer [documentation](https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html?icmpid=docs_acc_console_connect) for connecting to CodeCommit repositories
