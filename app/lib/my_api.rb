@@ -3,7 +3,8 @@ require 'sinatra'
 class MyApi < Sinatra::Base
 
   get '/v1/healthcheck' do
-    "OK"
+  # "OK"
+    raise 'kaboom!'
   end
 
 end
